@@ -23,12 +23,32 @@ namespace JoMo {
 					parseDateStrArr[i] = partsDate[i];
 				}
 				var parseDateStr = string.joinv (" ", parseDateStrArr);
-				var r = /([0-9]{2}\:([0-9]{2}\:([0-9\.]{2,6})/i;
+				var r = /([0-9]{2})\:([0-9]{2})\:([0-9\.]{2,6})/;
 				var timeParts = r.split (dateStr);
-				print ("\np1\n" + timeParts[0] + "\n\n");
-				print (timeParts[1] + "\n\n");
-				print (string.joinv (":", timeParts));
-				return parse_date (parseDateStr);
+				var hour = "00";
+				var minute = "00";
+				var second = "00";
+				for (var i = 1; i < timeParts.length - 1; i++) {
+					if (i == 1) {
+						hour = timeParts[i];
+					}
+					else if (i == 2) {
+						minute = timeParts[i];
+					}
+					else if (i == 3) {
+						second = timeParts[i];
+					}
+				}
+				parse_date (parseDateStr);
+
+				if (_valid) {
+					datetime = new GLib.DateTime.local (
+						datetime.get_year(), get_month (), get_day_of_month (),
+						int.parse (hour), int.parse (minute), int.parse (second)
+					);
+				}
+
+				return _valid;
 			} else {
 				return parse_date (dateStr);
 			}
@@ -36,7 +56,7 @@ namespace JoMo {
 			return _valid;
 		}
 		
-		public bool parse_date(string dateStr) {
+		public bool parse_date (string dateStr) {
 			var parsed_date = Date ();
 			parsed_date.set_parse (dateStr);
 			
