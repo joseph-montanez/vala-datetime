@@ -53,13 +53,13 @@ class TestExample : Gee.TestCase {
  
 	public void test_date_07 () {
 		assert (
-			new JoMo.DateTime.from_string ("2012-01-23 00:00:00").format ("%m/%d/%Y") == "01/23/2012"
+			new JoMo.DateTime.from_string ("2012-01-23 10:00:00").format ("%m/%d/%Y %H") == "01/23/2012 10"
 		);
 	}
  
 	public void test_date_08 () {
 		assert (
-			new JoMo.DateTime.from_string ("Jan 23 2012 00:00:00").format ("%m/%d/%Y") == "01/23/2012"
+			new JoMo.DateTime.from_string ("Jan 23 2012 09:00:00").format ("%m/%d/%Y %H") == "01/23/2012 09"
 		);
 	}
  
